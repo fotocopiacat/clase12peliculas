@@ -7,6 +7,7 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             var url = "http://swapi.co/api/films/"
             val request = Request.Builder().url(url).build()
             val cliente = OkHttpClient()
+      //      var movie = results
 
             cliente.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: okhttp3.Call?, e: IOException?) {
@@ -41,16 +43,20 @@ class MainActivity : AppCompatActivity() {
                     val pelicula = gson.fromJson(respuesta, Pelicula::class.java)
                    val historia = gson.fromJson(respuesta, Results::class.java)
 
-                    runOnUiThread {
+                    /*runOnUiThread {
                         val adaptador = CustomAdapter(this@MainActivity, R.layout.activity_lista,pelicula.title)
                         lvLista.adapter = adaptador
-                    }
+                    }*/
                 }
+
             })
         }
+
+       // Log.d("la pelicula es ", )
+
     }
 
-    class CustomAdapter(
+    /*class CustomAdapter(
         var miContexto:Context,
         var miRecurso:Int,
         var miLista: String
@@ -62,5 +68,5 @@ class MainActivity : AppCompatActivity() {
             buscapelicula = miLista[position].toString()
             return v
         }
-    }
+    }*/
 }
