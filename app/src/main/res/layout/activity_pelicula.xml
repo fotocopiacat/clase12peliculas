@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical">
+
+    <TextView
+            android:text="nombre peli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/lblTitulo" android:layout_margin="5dp"
+            android:textSize="18sp"/>
+    <TextView
+            android:text="episodio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/lblEpisodio" android:layout_margin="5dp"
+            android:textSize="18sp"/>
+    <TextView
+            android:text="anholanzamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/lblFecha" android:layout_margin="5dp"
+            android:textSize="18sp"/>
+    <TextView
+            android:text="director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/lblDirector" android:layout_margin="5dp"
+            android:textSize="18sp"/>
+    <TextView
+            android:text="productor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/lblProductor" android:layout_margin="5dp"
+            android:textSize="18sp"/>
+</LinearLayout>
