@@ -1,20 +1,17 @@
 package com.example.android.clase12peliculas
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
-import kotlinx.android.synthetic.main.activity_main.*
-import java.io.IOException
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.IOException
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_lista.*
-import kotlinx.android.synthetic.main.activity_pelicula.*
 
 import okhttp3.*
 
@@ -24,14 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //var v : View = findViewById<View>(R.layout.activity_main)
-        var peliBuscar: String = findViewById<EditText>(R.id.editPeli).text.toString()
-
         btnBuscar.setOnClickListener {
-            var url = "http://swapi.co/api/films/"
+            var url = "https://swapi.co/api/films/?format=json"
             val request = Request.Builder().url(url).build()
             val cliente = OkHttpClient()
-      //      var movie = results
 
             cliente.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: okhttp3.Call?, e: IOException?) {
@@ -40,33 +33,31 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: okhttp3.Call?, response: Response?) {
                     val respuesta = response?.body()?.string()
                     val gson = GsonBuilder().create()
-                    val pelicula = gson.fromJson(respuesta, Pelicula::class.java)
-                   val historia = gson.fromJson(respuesta, Results::class.java)
+                    val movie_response = gson.fromJson(respuesta, MovieApiResponse::class.java)
+                //    val pelicula = gson.fromJson(respuesta, Pelicula::class.java)
 
-                    /*runOnUiThread {
-                        val adaptador = CustomAdapter(this@MainActivity, R.layout.activity_lista,pelicula.title)
+
+                    runOnUiThread {
+                        val adaptador = CustomAdapter(this@MainActivity,
+                            R.layout.activity_pelicula,movie_response.results)
                         lvLista.adapter = adaptador
-                    }*/
+                    }
                 }
 
             })
         }
-
-       // Log.d("la pelicula es ", )
-
     }
 
-    /*class CustomAdapter(
-        var miContexto:Context,
+    class CustomAdapter(
+        var miContexto: Context,
         var miRecurso:Int,
-        var miLista: String
-    ):
+        var miLista: ArrayList<Pelicula>):
         ArrayAdapter<Pelicula>(miContexto,miRecurso,miLista) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             var v = LayoutInflater.from(miContexto).inflate(miRecurso, null)
-            var buscapelicula = v.findViewById<TextView>(R.id.editPeli).text.toString()
-            buscapelicula = miLista[position].toString()
+            var pelicula = v.findViewById<TextView>(R.id.lblTitulo)
+            pelicula.text = miLista[position].title.toString()
             return v
         }
-    }*/
+    }
 }

@@ -7,15 +7,12 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity" android:orientation="vertical">
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="busca pelicula"
-            android:ems="10"
-            android:id="@+id/editPeli" android:textSize="24sp"/>
     <Button
             android:text="busca peli"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/btnBuscar" android:textSize="24sp"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvLista"/>
 </LinearLayout>
